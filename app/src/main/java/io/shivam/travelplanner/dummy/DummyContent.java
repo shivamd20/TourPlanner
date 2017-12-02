@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
+import io.shivam.travelplanner.MyItemRecyclerViewAdapter;
 import io.shivam.travelplanner.R;
-import io.shivam.travelplanner.skeletons.Route;
-
+import io.shivam.travelplanner.MyItemRecyclerViewAdapter.Route;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -21,13 +20,13 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<Stack<String>> ITEMS = new ArrayList<Stack<String>>();
+    public static final List<Route> ITEMS = new ArrayList<Route>();
     public static final Map<Integer,String> NODE_MAP=new HashMap<>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, Stack<String>> ITEM_MAP = new HashMap<String, Stack<String>>();
+    public static final Map<String,Route> ITEM_MAP = new HashMap<String, Route>();
 
     private static final int COUNT = 2;
 
@@ -38,19 +37,16 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(Stack<String> item) {
+    private static void addItem(Route item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.get(0)+"", item);
     }
 
-    private static Stack<String> createDummyItem(int position) {
+    private static Route createDummyItem(int position) {
 
-       Stack<String> nodes=new Stack<>();
+       Route nodes=new Route();
 
-        Route route =new Route();
 
-        route.to=position;
-        route.from=456;
 
         nodes.push("raipur");
         nodes.push("bilaspur");

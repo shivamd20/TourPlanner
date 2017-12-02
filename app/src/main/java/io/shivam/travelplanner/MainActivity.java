@@ -23,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -401,6 +403,9 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
         DummyContent.ITEMS.clear();
         DummyContent.ITEMS.addAll( new AllPaths(graph,src,dest).getLists());
+
+
+
         Log.d(MainActivity.class.getName(),DummyContent.ITEMS.toString());
          newFragment = ItemFragment.newInstance(routeList);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

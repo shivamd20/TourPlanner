@@ -5,7 +5,6 @@ package io.shivam.travelplanner;
  */
 
 import java.util.ArrayList;
-import java.util.Stack;
 import java.util.Vector;
 
 /******************************************************************************
@@ -45,16 +44,16 @@ import java.util.Vector;
 
 public class AllPaths {
 
-    private Stack<String> path  = new Stack<String>();   // the current path
+    private MyItemRecyclerViewAdapter.Route path  = new MyItemRecyclerViewAdapter.Route();   // the current path
     private SET<String> onPath  = new SET<String>();     // the set of vertices on the path
 
-    private ArrayList<Stack<String>> lists=new ArrayList<>();
+    private ArrayList<MyItemRecyclerViewAdapter.Route> lists=new ArrayList<>();
 
     public AllPaths(Graph G, String s, String t) {
         enumerate(G, s, t);
     }
 
-    public ArrayList<Stack<String>> getLists()
+    public ArrayList<MyItemRecyclerViewAdapter.Route> getLists()
     {
         return lists;
     }
@@ -71,7 +70,7 @@ public class AllPaths {
         {
             StdOut.println(path);
 
-        Stack<String> temp = (Stack<String>) path.clone();
+        MyItemRecyclerViewAdapter.Route temp = (MyItemRecyclerViewAdapter.Route) path.clone();
 
         lists.add(temp);
 

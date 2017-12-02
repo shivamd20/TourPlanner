@@ -10,6 +10,7 @@ import io.shivam.travelplanner.ItemFragment.OnListFragmentInteractionListener;
 import io.shivam.travelplanner.dummy.DummyContent;
 import io.shivam.travelplanner.skeletons.Route;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 
@@ -19,11 +20,17 @@ import java.util.Stack;
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+    
+    public static class Route extends Stack<String>{
 
-    private final List<Stack<String>> mValues;
+        public int cost=0;
+
+    }
+
+    private final List<Route> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<Stack<String>> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(List<Route> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -58,6 +65,22 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             a++;
 
         }
+
+        mValues.get(position).cost=cost;
+
+        mValues.sort(new Comparator<Route>() {
+            @Override
+            public int compare(Route strings, Route t1) {
+
+                if(strings.cost>t1.cost)
+                    return 1;
+                else  if(strings.cost<t1.cost)
+                    return -1;
+
+                return 0;
+            }
+        });
+
         holder.mIdView.setText(cost+"K.M.");
 
         StringBuilder sb=new StringBuilder("start->");
@@ -98,13 +121,15 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public Stack<String> mItem;
+        public Route mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
+
+
         }
 
         @Override
