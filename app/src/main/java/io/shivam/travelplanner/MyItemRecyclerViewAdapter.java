@@ -8,9 +8,7 @@ import android.widget.TextView;
 
 import io.shivam.travelplanner.ItemFragment.OnListFragmentInteractionListener;
 import io.shivam.travelplanner.dummy.DummyContent;
-import io.shivam.travelplanner.skeletons.Route;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -29,7 +27,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     }
 
-    private final List<Route> mValues;
+    private  final List<Route> mValues;
     private final OnListFragmentInteractionListener mListener;
 
     public MyItemRecyclerViewAdapter(List<Route> items, OnListFragmentInteractionListener listener) {
@@ -44,12 +42,63 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return new ViewHolder(view);
     }
 
+    public  void sort()
+    {
+
+        for(int position=0;position<mValues.size();position++) {
+            int cost = 0;
+
+            int a = Integer.parseInt(mValues.get(position).get(0));
+
+            for (int i = 1; i < mValues.get(position).size(); i++) {
+                try {
+
+                    cost += MainActivity.costHash.get(a + ":" + mValues.get(position).get(i));
+                } catch (NullPointerException ne) {
+                    ne.printStackTrace();
+                }
+
+                a++;
+
+            }
+
+
+            mValues.get(position).cost = cost;
+
+
+
+        }
+
+        Collections.sort(mValues, new Comparator<Route>() {
+            @Override
+            public int compare(Route strings, Route t1) {
+
+                if (strings.cost > t1.cost) return +1;
+
+                if (strings.cost < t1.cost) return -1;
+
+                return 0;
+            }
+        });
+    }
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         //holder.mItem = mValues.get(position);
 
 
-        int cost=0;
+        int cost=Integer.parseInt(mValues.get(position).get(0));
+
+
+        if(cost==0)
+        {
+            mValues.remove(position);
+
+            return;
+        }
+
+
+
 
         int a=Integer.parseInt(mValues.get(position).get(0));
 
@@ -68,35 +117,10 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
         }
 
-        mValues.get(position).cost=cost;
+        if(mValues.get(position).cost==0)
+            return;
 
-//        mValues.sort(new Comparator<Route>() {
-//            @Override
-//            public int compare(Route strings, Route t1) {
-//
-//                if(strings.cost>t1.cost)
-//                    return 1;
-//                else  if(strings.cost<t1.cost)
-//                    return -1;
-//
-//                return 0;
-//            }
-//        });
-
-
-        Collections.sort(mValues, new Comparator<Route>() {
-            @Override
-            public int compare(Route strings, Route t1) {
-
-                if(strings.cost>t1.cost) return +1;
-
-                if(strings.cost<t1.cost) return -1;
-
-                return 0;
-            }
-        });
-
-        holder.mIdView.setText(cost+"K.M.");
+        holder.mIdView.setText( mValues.get(position).cost+"K.M.");
 
         StringBuilder sb=new StringBuilder("start->");
 
