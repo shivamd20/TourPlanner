@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     HasuraClient client;
     Graph graph;
     private ItemFragment newFragment;
-    HashMap<String,Integer> costHash=new HashMap<>();
+   public static HashMap<String,Integer> costHash=new HashMap<>();
 
     public static SimpleWeightedGraph sWGraph;
 
@@ -127,12 +127,6 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
                 }
 
 
-
-                try {
-                    getAllRouts();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }

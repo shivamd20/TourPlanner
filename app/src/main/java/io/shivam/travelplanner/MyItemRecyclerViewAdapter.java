@@ -38,8 +38,27 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         //holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).get(0)+"K.M.");
 
+
+        int cost=0;
+
+        int a=Integer.parseInt(mValues.get(position).get(0));
+
+        for(int i=1;i<mValues.get(position).size();i++)
+        {
+            try {
+
+                cost+=MainActivity.costHash.get(a+":"+mValues.get(position).get(i));
+            }
+            catch (NullPointerException ne)
+            {
+             ne.printStackTrace();
+            }
+
+            a++;
+
+        }
+        holder.mIdView.setText(cost+"K.M.");
 
         StringBuilder sb=new StringBuilder("start->");
 
