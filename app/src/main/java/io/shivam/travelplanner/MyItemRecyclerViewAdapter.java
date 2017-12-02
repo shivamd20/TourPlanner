@@ -10,6 +10,8 @@ import io.shivam.travelplanner.ItemFragment.OnListFragmentInteractionListener;
 import io.shivam.travelplanner.dummy.DummyContent;
 import io.shivam.travelplanner.skeletons.Route;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
@@ -68,14 +70,27 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
         mValues.get(position).cost=cost;
 
-        mValues.sort(new Comparator<Route>() {
+//        mValues.sort(new Comparator<Route>() {
+//            @Override
+//            public int compare(Route strings, Route t1) {
+//
+//                if(strings.cost>t1.cost)
+//                    return 1;
+//                else  if(strings.cost<t1.cost)
+//                    return -1;
+//
+//                return 0;
+//            }
+//        });
+
+
+        Collections.sort(mValues, new Comparator<Route>() {
             @Override
             public int compare(Route strings, Route t1) {
 
-                if(strings.cost>t1.cost)
-                    return 1;
-                else  if(strings.cost<t1.cost)
-                    return -1;
+                if(strings.cost>t1.cost) return +1;
+
+                if(strings.cost<t1.cost) return -1;
 
                 return 0;
             }
