@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import io.shivam.travelplanner.dummy.DummyContent;
-import io.shivam.travelplanner.skeletons.Node;
+import io.shivam.travelplanner.skeletons.Route;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -41,10 +41,10 @@ public class ItemFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(ArrayList<Node> nodes) {
+    public static ItemFragment newInstance(ArrayList<Route> routes) {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_ROUTES, nodes);
+        args.putSerializable(ARG_ROUTES, routes);
         fragment.setArguments(args);
         return fragment;
     }

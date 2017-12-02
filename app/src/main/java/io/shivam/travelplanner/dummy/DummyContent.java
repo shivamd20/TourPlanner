@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
-import io.shivam.travelplanner.skeletons.Node;
+import io.shivam.travelplanner.R;
+import io.shivam.travelplanner.skeletons.Route;
 
 
 /**
@@ -22,13 +22,14 @@ public class DummyContent {
      * An array of sample (dummy) items.
      */
     public static final List<Stack<String>> ITEMS = new ArrayList<Stack<String>>();
+    public static final Map<Integer,String> NODE_MAP=new HashMap<>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, Stack<String>> ITEM_MAP = new HashMap<String, Stack<String>>();
 
-    private static final int COUNT = 25;
+    private static final int COUNT = 2;
 
     static {
         // Add some sample items.
@@ -46,10 +47,10 @@ public class DummyContent {
 
        Stack<String> nodes=new Stack<>();
 
-        Node node=new Node();
+        Route route =new Route();
 
-        node.to=position;
-        node.from=456;
+        route.to=position;
+        route.from=456;
 
         nodes.push("raipur");
         nodes.push("bilaspur");

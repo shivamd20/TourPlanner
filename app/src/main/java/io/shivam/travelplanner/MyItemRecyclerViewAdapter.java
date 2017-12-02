@@ -7,13 +7,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import io.shivam.travelplanner.ItemFragment.OnListFragmentInteractionListener;
-import io.shivam.travelplanner.skeletons.Node;
+import io.shivam.travelplanner.dummy.DummyContent;
+import io.shivam.travelplanner.skeletons.Route;
 
 import java.util.List;
 import java.util.Stack;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Node} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Route} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
@@ -36,9 +37,26 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).get(0)+"ramu");
-        holder.mContentView.setText(mValues.get(position).get(0)+"kalu");
+        //holder.mItem = mValues.get(position);
+        holder.mIdView.setText(mValues.get(position).get(0)+"K.M.");
+
+
+        StringBuilder sb=new StringBuilder("start->");
+
+        for (String str :
+                mValues.get(position)) {
+
+        int n=    Integer.parseInt(str);
+
+           str= DummyContent.NODE_MAP.get(n);
+
+            sb.append(str+" ->");
+
+        }
+
+        sb.append("end");
+
+        holder.mContentView.setText(sb.toString());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
