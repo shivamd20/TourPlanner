@@ -65,6 +65,11 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
             mValues.get(position).cost = cost;
 
+            if(cost==0)
+            {
+                mValues.remove(position);
+            }
+
 
 
         }
