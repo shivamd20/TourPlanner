@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     HasuraClient client;
     Graph graph;
     private ItemFragment newFragment;
+    HashMap<String,Integer> costHash=new HashMap<>();
 
     public static SimpleWeightedGraph sWGraph;
 
@@ -158,13 +160,15 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
             public void onSuccess(List<Route> routes) {
 
 
-
+                costHash=new HashMap<String, Integer>();
 
                 for (Route r: routes
                      ) {
                     graph.addEdge(r.to+"",r.from+"");
 
-                    
+                    costHash.put(r.to+":"+r.from,r.cost);
+
+
 
                     Log.e(MainActivity.class.getName(),r.to+"");
 
@@ -341,12 +345,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
                         Gson gson=new Gson();
 
                         routeList = new ArrayList<>();
+
+                        costHash=new HashMap<String, Integer>();
+
                         String rawBody = str;
                         Log.i("Response", rawBody);
 
                         JsonArray array = new JsonParser().parse(rawBody).getAsJsonArray();
                         for (JsonElement jsonElement : array) {
                             Route r = gson.fromJson(jsonElement, Route.class);
+
+                            costHash.put(r.to+":"+r.from,r.cost);
+
                             routeList.add(r);
                         }
                        // return responseList; TODO
