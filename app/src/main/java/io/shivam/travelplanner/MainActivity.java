@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
                 }
 
 
+                responseToRecyclerView();
+
             }
         });
     }
@@ -364,6 +366,8 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
                 } catch (HasuraJsonException e1) {
                     e1.printStackTrace();
+
+                    Log.e(MainActivity.class.getName(),e1.getMessage());
                 }
 
 
@@ -375,7 +379,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
                 }
 
-                Log.i(MainActivity.class.getName(),new AllPaths(graph,"1","10").getLists().toString());
+
                 qFrame.setVisibility(View.VISIBLE);
                 ( (TextView)findViewById(R.id.connect)).setText("It seems that there is some problem in the network. You are switched to offline mode.");
 
