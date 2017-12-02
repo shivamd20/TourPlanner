@@ -11,9 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import io.shivam.travelplanner.dummy.DummyContent;
-import io.shivam.travelplanner.dummy.DummyContent.DummyItem;
+import io.shivam.travelplanner.skeletons.Node;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * A fragment representing a list of Items.
@@ -25,9 +26,11 @@ public class ItemFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String ARG_ROUTES = "COLOUM COUNT";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -38,10 +41,10 @@ public class ItemFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount) {
+    public static ItemFragment newInstance(ArrayList<Node> nodes) {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putSerializable(ARG_ROUTES, nodes);
         fragment.setArguments(args);
         return fragment;
     }
@@ -104,6 +107,6 @@ public class ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Stack<String> item);
     }
 }

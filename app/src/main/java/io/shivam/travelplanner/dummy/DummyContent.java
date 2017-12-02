@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
+import java.util.StringTokenizer;
+
+import io.shivam.travelplanner.skeletons.Node;
+
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -16,12 +21,12 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static final List<Stack<String>> ITEMS = new ArrayList<Stack<String>>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static final Map<String, Stack<String>> ITEM_MAP = new HashMap<String, Stack<String>>();
 
     private static final int COUNT = 25;
 
@@ -32,13 +37,27 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    private static void addItem(Stack<String> item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.get(0)+"", item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+    private static Stack<String> createDummyItem(int position) {
+
+       Stack<String> nodes=new Stack<>();
+
+        Node node=new Node();
+
+        node.to=position;
+        node.from=456;
+
+        nodes.push("raipur");
+        nodes.push("bilaspur");
+        nodes.push("durg");
+        nodes.push("cjandigadh");
+        nodes.push("rajnandgaon");
+
+        return nodes;
     }
 
     private static String makeDetails(int position) {
@@ -53,20 +72,5 @@ public class DummyContent {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
-        public final String id;
-        public final String content;
-        public final String details;
 
-        public DummyItem(String id, String content, String details) {
-            this.id = id;
-            this.content = content;
-            this.details = details;
-        }
-
-        @Override
-        public String toString() {
-            return content;
-        }
-    }
 }
